@@ -3,7 +3,7 @@
 namespace pf::debug
 {
 
-LogFunc g_log_func =
+static LogFunc s_log_func =
 
 #if defined(PFDEBUG_LOG_ENABLED)
     &default_log_handler;
@@ -13,12 +13,12 @@ LogFunc g_log_func =
 
 void set_log_handler(LogFunc handler)
 {
-    g_log_func = handler;
+    s_log_func = handler;
 }
 
 LogFunc get_log_handler()
 {
-    return g_log_func;
+    return s_log_func;
 }
 
 #if defined(PFDEBUG_LOG_ENABLED)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <PF_Debug/Detail/Export.hpp>
 #include <stdio.h>
 
 namespace pf::debug
@@ -13,8 +14,9 @@ namespace pf::debug
     };
 
     using LogFunc = void(*)(Severity severity, const char* message);
-    void set_log_handler(LogFunc handler);
-    LogFunc get_log_handler();
+
+    PFDEBUG_API void set_log_handler(LogFunc handler);
+    PFDEBUG_API LogFunc get_log_handler();
 
 #if defined(PFDEBUG_LOG_ENABLED)
     #define PFDEBUG_LOG_DEBUG(format, ...) \
@@ -40,7 +42,7 @@ namespace pf::debug
         }
     }
 
-    void default_log_handler(Severity severity, const char* message);
+    PFDEBUG_API void default_log_handler(Severity severity, const char* message);
 #else
     #define PFDEBUG_LOG_DEBUG(format, ...) (void)0
     #define PFDEBUG_LOG_INFO(format, ...) (void)0

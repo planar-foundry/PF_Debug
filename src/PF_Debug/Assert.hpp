@@ -1,12 +1,14 @@
 #pragma once
 
+#include <PF_Debug/Detail/Export.hpp>
 #include <stdio.h>
 
 namespace pf::debug
 {
     using AssertFunc = void(*)(const char* condition, const char* file, int line, const char* message);
-    void set_assert_handler(AssertFunc handler);
-    AssertFunc get_assert_handler();
+
+    PFDEBUG_API void set_assert_handler(AssertFunc handler);
+    PFDEBUG_API AssertFunc get_assert_handler();
 
 #if defined(PFDEBUG_ASSERT_ENABLED)
     #define PFDEBUG_ASSERT(condition) \
@@ -38,7 +40,7 @@ namespace pf::debug
         }
     }
 
-    void default_assert_handler(const char* condition, const char* file, int line, const char* message);
+    PFDEBUG_API void default_assert_handler(const char* condition, const char* file, int line, const char* message);
 #else
     #define PFDEBUG_ASSERT(condition) (void)0
     #define PFDEBUG_ASSERT_MSG(condition, format, ...) (void)0

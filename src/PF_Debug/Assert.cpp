@@ -1,11 +1,9 @@
 #include <PF_Debug/Assert.hpp>
 
-#include <exception>
-
 namespace pf::debug
 {
 
-AssertFunc g_assert_func =
+static AssertFunc s_assert_func =
 
 #if defined(PFDEBUG_ASSERT_ENABLED)
     &default_assert_handler;
@@ -15,17 +13,17 @@ AssertFunc g_assert_func =
 
 void set_assert_handler(AssertFunc handler)
 {
-    g_assert_func = handler;
+    s_assert_func = handler;
 }
 
 AssertFunc get_assert_handler()
 {
-    return g_assert_func;
+    return s_assert_func;
 }
 
 #if defined(PFDEBUG_ASSERT_ENABLED)
 
-void default_assert_handler(const char* condition, const char* file, int line, const char* message)
+void default_assert_handler(const char* condition, const char* file, int, const char* message)
 {
     fputs(condition, stderr);
     fputs(" failured in ", stderr);
@@ -33,7 +31,6 @@ void default_assert_handler(const char* condition, const char* file, int line, c
     fputs(" with message ", stderr);
     fputs(message, stderr);
     fflush(stderr);
-    std::terminate();
 }
 
 #endif
