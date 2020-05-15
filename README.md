@@ -7,3 +7,7 @@ A library that exposes some simple tools to handle common debug tasks.
 
 * Logging
 * Assertions
+
+## Instructions
+
+Refer to `tests/` for a minimal example.
